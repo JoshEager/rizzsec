@@ -1,6 +1,6 @@
 CC = gcc
-OBJFILES = main.o io.o
-SRCFILES = main.c io.c
+OBJFILES = main.o io.o crypt.o
+SRCFILES = main.c io.c crypt.o
 BINARY = rizzsec
 
 all: $(BINARY)

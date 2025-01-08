@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
             }
         } else if (strcmp(argv[i], "-o") == 0) {
             if (i + 1 < argc) {
-                write_path = argv[i];
+                write_path = argv[i + 1];
             } else {
                 perror("Warning: no output file specified");
                 write_path = "id_rizz.enc";
