@@ -19,7 +19,7 @@ int indexof(char character, char *key) {
     int index;
     bool character_found = false;
     int key_size = strsize(key);
-    for (int i = 0; i < key_size; i++) {
+    for (int i = 0; i < key_size - 1; i++) { // We don't want to look for the null terminator (because it isn't actually part of the key), so subtract 1
         if (key[i] == character) {
             index = i;
             character_found = true;
@@ -53,17 +53,19 @@ char *encrypt(char *plain_string, hash_map hashmap) {
     return encrypted_string;
 }
 
-char *decrypt(char *encypted_string, hash_map hashmap) {
-    int size_of_string = strsize(encypted_string);
+char *decrypt(char *encrypted_string, hash_map hashmap) {
+    int size_of_string = strsize(encrypted_string);
     char *decrypted_string = (char*)malloc(size_of_string * sizeof(char));
 
     for (int i = 0; i < size_of_string; i++) {
-        int decrypted_value = indexof(encypted_string[i], hashmap.array);
+        int decrypted_value = indexof(encrypted_string[i], hashmap.array);
         // Makes sure that index of the character is actually found 
         if (decrypted_value != -1) {
             decrypted_string[i] = hashmap.unhash_function(decrypted_value);
         } else {
-            perror("Error: unable to decrypt a character!");
+            // It will always jump here once for the null terminator! (issue with index of, since the key has a null terminator appended to it in order to be a valid string)
+            decrypted_string[i] = encrypted_string[i];
+            // perror("Error: unable to decrypt a character!");
         }
     }
 
