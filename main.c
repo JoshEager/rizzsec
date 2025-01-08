@@ -6,9 +6,9 @@
 
 int main(int argc, char* argv[]) {
     // Parsing arguments
-    char *key_path;
-    char *read_path;
-    char *write_path;
+    char *key_path = NULL;
+    char *read_path = NULL;
+    char *write_path = NULL;
     char *mode = NULL;
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-i") == 0) {
@@ -38,10 +38,19 @@ int main(int argc, char* argv[]) {
             mode = "decrypt";
         }
     }
-    // Ensure that a mode was specified
+    // Ensure that required arguments were specified
     if (mode == NULL) {
         perror("No mode was specified! Should be either encrypt or decrypt.");
         return 1;
+    } else if (key_path == NULL) {
+        perror("No key path was provided!");
+        return 1;
+    } else if (read_path == NULL) {
+        perror("No read file was specified!");
+        return 1;
+    } else if (write_path == NULL) {
+        perror("No output file specified, set to default (id_rizz.enc)");
+        write_path = "id_rizz.enc";
     }
 
     // Make the key into a hashmap
