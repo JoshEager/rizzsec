@@ -1,6 +1,6 @@
 CC = gcc
 OBJFILES = main.o io.o crypt.o hashmap.o
-SRCFILES = main.c io.c crypt.c hashmap.c
+SRCFILES = src/main.c src/io.c src/crypt.c src/hashmap.c
 BINARY = rizzsec
 
 all: $(BINARY)
