@@ -21,3 +21,8 @@ To generate a key, simply run the script rizzsec-keygen
 
 rizzsec-keygen takes one argument (-o). In -o you should provide the
 name for the key. If you don't specify it, it will be rizz.key
+
+Example keygen:
+    ./rizzsec-keygen -o message.key
+This will create a file called message.key 
+
